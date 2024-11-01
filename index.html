@@ -18,44 +18,43 @@
             margin: 0;
             color: #ffe078;
             flex-direction: column;
+            padding: 20px;
+            box-sizing: border-box;
         }
+        
         #startScreen {
             text-align: center;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            opacity: 0;
-            transition: opacity 1s ease-in-out;
-            animation: fadeIn 1.5s forwards;
+            max-width: 100%;
+            width: 100%;
         }
+
         #startScreen img {
-            width: 500px;
-            margin-bottom: 50px;
-            transition: transform 0.3s ease-in-out;
+            width: 100%;
+            max-width: 500px; /* Tamanho maior para desktop */
+            margin-bottom: 20px;
+            height: auto;
         }
-        #startScreen img:hover {
-            transform: scale(1.05);
-        }
+
         input {
             padding: 10px;
             font-size: 18px;
             width: 100%;
-            max-width: 650px;
+            max-width: 350px;
             margin-bottom: 20px;
             border: 1px solid #ffe078;
             border-radius: 5px;
             background-color: #ffe078;
             color: #5c2d69;
-            transition: background-color 0.3s ease, color 0.3s ease;
         }
+
         input::placeholder {
             color: #5c2d69;
         }
-        input:focus {
-            background-color: #fddc8f;
-            outline: none;
-        }
+
         button {
             padding: 10px;
             font-size: 18px;
@@ -64,15 +63,25 @@
             color: #ffe078;
             border: 2px solid #ffe078;
             border-radius: 5px;
-            width: 250px;
-            transition: background-color 0.3s ease, color 0.3s ease;
+            width: 200px;
         }
+
         button:hover {
             background-color: #ffe078;
             color: #5a2b69;
         }
-        @keyframes fadeIn {
-            to { opacity: 1; }
+
+        /* Estilos para dispositivos menores */
+        @media (max-width: 768px) {
+            #startScreen img {
+                max-width: 80%; /* Ajuste da imagem para telas menores */
+            }
+
+            input, button {
+                font-size: 16px;
+                width: 80%;
+                max-width: 300px;
+            }
         }
     </style>
 </head>
@@ -93,6 +102,7 @@
         }
         window.location.href = `calculo.html?name=${encodeURIComponent(name)}`;
     }
+
     document.getElementById('nameInput').addEventListener('keydown', function(event) {
         if (event.key === 'Enter') {
             redirectToCalculation();
