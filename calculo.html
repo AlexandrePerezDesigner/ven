@@ -9,7 +9,7 @@
     <style>
         body {
             font-family: 'DM Sans', sans-serif;
-            background: url('C:/Users/User/OneDrive/Design/ven/imgs/bgven.jpg') no-repeat center center fixed;
+            background: url('./imgs/bgven.jpg') no-repeat center center fixed;
             background-size: cover;
             margin: 0;
             color: #ffe078;
@@ -21,7 +21,6 @@
         }
 
         .calculator-container {
-            /*background-color: rgba(0, 0, 0, 0.7);*/
             padding: 20px;
             border-radius: 15px;
             max-width: 90vw;
@@ -32,14 +31,14 @@
         .name-row, .summary p {
             display: flex;
             justify-content: center;
-            font-size: 2vw; /* ajusta para telas menores */
+            font-size: 2vw;
         }
 
-.name-row div {
-    width: 50px; /* ou ajuste para um valor adequado à sua tela */
-    text-align: center;
-    font-size: 2.5vw;
-}
+        .name-row div {
+            width: 50px;
+            text-align: center;
+            font-size: 2.5vw;
+        }
 
         .summary p {
             font-size: 1.5vw;
@@ -55,7 +54,7 @@
 
         @media (max-width: 768px) {
             .name-row div, .summary p {
-                font-size: 4vw; /* ajusta para telas menores */
+                font-size: 4vw;
             }
 
             .summary p {
@@ -71,16 +70,14 @@
     <div id="nameDisplay" class="name-row name" style="font-weight: bold;"></div>
     <div id="consonantNumbers" class="name-row"></div>
 
-<div class="summary" id="summary" style="margin-top: 35px;">
-    <p id="vowelSum">VOGAIS: <b>&nbsp;0</b>&nbsp; (<span>alma</span>)</p>
-    <p id="consonantSum">CONSOANTES: <b>&nbsp;0</b> (<span>personalidade</span>)</p>
-    <p id="totalSum">TOTAL: <b>&nbsp;0</b> (<span>destino</span>)</p>
-</div>
-
-
+    <div class="summary" id="summary" style="margin-top: 35px;">
+        <p id="vowelSum">VOGAIS:&nbsp; <b>0</b> &nbsp;(<span>alma</span>)</p>
+        <p id="consonantSum">CONSOANTES:&nbsp; <b>0</b> &nbsp;(<span>personalidade</span>)</p>
+        <p id="totalSum">TOTAL:&nbsp; <b>0</b> &nbsp;(<span>destino</span>)</p>
+    </div>
 
     <div class="logo">
-        <img src="C:/Users/User/OneDrive/Design/ven/imgs/ven-logo.png" alt="Vida em Números Logo" onclick="goToHome()">
+        <img src="./imgs/ven-logo.png" alt="Vida em Números Logo" onclick="goToHome()">
     </div>
 </div>
 
