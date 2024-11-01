@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vida em Números - Cálculo</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: url('C:/Users/User/OneDrive/Design/ven/imgs/bgven.jpg') no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+            color: #ffe078;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .calculator-container {
+            /*background-color: rgba(0, 0, 0, 0.7);*/
+            padding: 20px;
+            border-radius: 15px;
+            max-width: 90vw;
+            text-align: center;
+            width: 1200px;
+        }
+
+        .name-row, .summary p {
+            display: flex;
+            justify-content: center;
+            font-size: 2vw; /* ajusta para telas menores */
+        }
+
+.name-row div {
+    width: 50px; /* ou ajuste para um valor adequado à sua tela */
+    text-align: center;
+    font-size: 2.5vw;
+}
+
+        .summary p {
+            font-size: 1.5vw;
+            margin: 10px 0;
+        }
+
+        .logo img {
+            width: 50%;
+            max-width: 150px;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .name-row div, .summary p {
+                font-size: 4vw; /* ajusta para telas menores */
+            }
+
+            .summary p {
+                font-size: 3vw;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="calculator-container">
+    <div id="vowelNumbers" class="name-row"></div>
+    <div id="nameDisplay" class="name-row name" style="font-weight: bold;"></div>
+    <div id="consonantNumbers" class="name-row"></div>
+
+<div class="summary" id="summary" style="margin-top: 35px;">
+    <p id="vowelSum">VOGAIS: <b>&nbsp;0</b>&nbsp; (<span>alma</span>)</p>
+    <p id="consonantSum">CONSOANTES: <b>&nbsp;0</b> (<span>personalidade</span>)</p>
+    <p id="totalSum">TOTAL: <b>&nbsp;0</b> (<span>destino</span>)</p>
+</div>
+
+
+
+    <div class="logo">
+        <img src="C:/Users/User/OneDrive/Design/ven/imgs/ven-logo.png" alt="Vida em Números Logo" onclick="goToHome()">
+    </div>
+</div>
+
+<script>
+    function getQueryParam(param) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(param);
+    }
+
+    function calculateNumerology() {
+        const nameInput = getQueryParam('name').toUpperCase();
+        const summary = document.getElementById('summary');
+
+        const numerologyValues = {
+            'A': 1, 'B': 2, 'C': 3, 'D': 4, 'E': 5, 'F': 6, 'G': 7, 'H': 8, 'I': 9,
+            'J': 1, 'K': 2, 'L': 3, 'M': 4, 'N': 5, 'O': 6, 'P': 7, 'Q': 8, 'R': 9,
+            'S': 1, 'T': 2, 'U': 3, 'V': 4, 'W': 5, 'X': 6, 'Y': 7, 'Z': 8,
+            'Á': 1, 'À': 1, 'Â': 1, 'Ã': 1, 'É': 5, 'È': 5, 'Ê': 5, 'Í': 9, 'Ì': 9, 'Ó': 6,
+            'Ò': 6, 'Ô': 6, 'Õ': 6, 'Ú': 3, 'Ù': 3, 'Ç': 3
+        };
+
+        const vowels = ['A', 'E', 'I', 'O', 'U', 'Y', 'Á', 'À', 'Â', 'Ã', 'É', 'È', 'Ê', 'Í', 'Ì', 'Ó', 'Ò', 'Ô', 'Õ', 'Ú', 'Ù'];
+        const name = nameInput.split(' ');
+
+        let vowelNumbers = '';
+        let consonantNumbers = '';
+        let nameDisplay = '';
+
+        let vowelSum = 0;
+        let consonantSum = 0;
+
+        name.forEach(word => {
+            for (let i = 0; i < word.length; i++) {
+                let char = word[i];
+                if (numerologyValues[char]) {
+                    let value = numerologyValues[char];
+
+                    nameDisplay += `<div>${char}</div>`;
+
+                    if (vowels.includes(char)) {
+                        vowelNumbers += `<div class="number">${value}</div>`;
+                        consonantNumbers += `<div>&nbsp;</div>`;
+                        vowelSum += value;
+                    } else {
+                        consonantNumbers += `<div class="number">${value}</div>`;
+                        vowelNumbers += `<div>&nbsp;</div>`;
+                        consonantSum += value;
+                    }
+                }
+            }
+            nameDisplay += '<div style="width: 30px;"></div>';
+            vowelNumbers += '<div style="width: 30px;"></div>';
+            consonantNumbers += '<div style="width: 30px;"></div>';
+        });
+
+        document.getElementById('vowelNumbers').innerHTML = vowelNumbers;
+        document.getElementById('nameDisplay').innerHTML = nameDisplay;
+        document.getElementById('consonantNumbers').innerHTML = consonantNumbers;
+
+        function decomposeCalculation(value) {
+            let steps = [];
+            let decomposed = value;
+            while (decomposed > 9 && decomposed !== 11 && decomposed !== 22) {
+                const digits = decomposed.toString().split('').map(Number);
+                const sum = digits.reduce((acc, curr) => acc + curr, 0);
+                steps.push(`${digits.join(' + ')} = ${sum}`);
+                decomposed = sum;
+            }
+            return steps.join(' = ');
+        }
+
+        const vowelCalculation = decomposeCalculation(vowelSum);
+        const consonantCalculation = decomposeCalculation(consonantSum);
+        const totalSum = vowelSum + consonantSum;
+        const totalCalculation = decomposeCalculation(totalSum);
+
+        document.getElementById('vowelSum').innerHTML = `VOGAIS:&nbsp; <b>${vowelSum} = ${vowelCalculation}</b> &nbsp;(<span>alma</span>)`;
+        document.getElementById('consonantSum').innerHTML = `CONSOANTES:&nbsp; <b>${consonantSum} = ${consonantCalculation}</b> &nbsp;(<span>personalidade</span>)`;
+        document.getElementById('totalSum').innerHTML = `TOTAL:&nbsp; <b>${totalSum} = ${totalCalculation}</b> &nbsp;(<span>destino</span>)`;
+    }
+
+    function goToHome() {
+        window.location.href = "index.html";
+    }
+
+    window.onload = calculateNumerology;
+</script>
+
+</body>
+</html>
